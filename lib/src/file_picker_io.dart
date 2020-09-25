@@ -76,12 +76,15 @@ class FilePickerIO extends FilePicker {
             );
       }
 
-      final List<Map> result = await _channel.invokeListMethod(type, {
+      final List<String> resultList = await _channel.invokeListMethod(type, {
         'allowMultipleSelection': allowMultipleSelection,
         'allowedExtensions': allowedExtensions,
         'allowCompression': allowCompression,
         'withData': withData,
       });
+      final List<Map> result = [
+        {'path': resultList.first}
+      ];
 
       if (result == null) {
         return null;
